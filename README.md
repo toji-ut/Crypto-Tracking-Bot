@@ -1,6 +1,7 @@
 # Crypto-Tracking-Bot
 
-@crypt_crypt_track_bot 
+[crypt_crypt_track_bot 
+](https://t.me/crypt_crypt_track_bot)
 
 Telegram bot that fetches the latest top 10 cryptocurrency prices
 
