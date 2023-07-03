@@ -1,4 +1,7 @@
 # Crypto-Tracking-Bot
+
+@crypt_crypt_track_bot 
+
 Telegram bot that fetches the latest top 10 cryptocurrency prices
 
 # Two functions available: /start & /prices
