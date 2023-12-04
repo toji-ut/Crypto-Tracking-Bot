@@ -9,7 +9,7 @@ from telegram.ext import Application, CallbackContext, CallbackQueryHandler, Com
 logging.basicConfig(level=logging.INFO)
 
 # CoinMarketCap API URL
-CMC_API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+CMC_API_URL = 'your api key'
 
 
 def get_top_cryptocurrencies():
