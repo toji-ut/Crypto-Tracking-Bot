@@ -4,13 +4,7 @@ from config import *
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CallbackContext, CallbackQueryHandler, CommandHandler, MessageHandler, filters
 
-
-# Set up logging
 logging.basicConfig(level=logging.INFO)
-
-# CoinMarketCap API URL
-CMC_API_URL = 'your api key'
-
 
 def get_top_cryptocurrencies():
     params = {
@@ -30,7 +24,6 @@ def get_top_cryptocurrencies():
     else:
         return None
 
-
 async def start(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     keyboard = [
@@ -40,7 +33,6 @@ async def start(update: Update, context: CallbackContext):
     await context.bot.send_message(chat_id=chat_id, text="Welcome to the CryptoBot! Please click the button below "
                                                          "to get the latest cryptocurrency prices:",
                                    reply_markup=reply_markup)
-
 
 async def prices(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
@@ -58,7 +50,6 @@ async def prices(update: Update, context: CallbackContext):
 
     await context.bot.send_message(chat_id=chat_id, text=message)
 
-
 async def handle_button(update: Update, context: CallbackContext):
     query = update.callback_query
     data = query.data
@@ -66,23 +57,6 @@ async def handle_button(update: Update, context: CallbackContext):
     if data == 'prices':
         await query.answer()
         await prices(update, context)
-
-
-async def handle_message(update: Update, context: CallbackContext):
-    chat_id = update.effective_chat.id
-    text = update.message.text.lower().rstrip('?')  # Remove question mark from the end of the text
-
-    match text:
-        case 'hello':
-            await context.bot.send_message(chat_id=chat_id, text="Hello! How can I assist you?")
-        case 'how are you':
-            await context.bot.send_message(chat_id=chat_id, text="I'm a bot, but thank you for asking!")
-        case 'what can you do':
-            await context.bot.send_message(chat_id=chat_id,
-                                           text="I can give you the prices of the top 10 latest cryptocurrencies!")
-        case _:
-            await context.bot.send_message(chat_id=chat_id, text="Sorry, I didn't understand that.")
-
 
 def main():
     print('Starting...')
@@ -92,10 +66,9 @@ def main():
     app.add_handler(CommandHandler('start', start))
     app.add_handler(CommandHandler('prices', prices))
     app.add_handler(CallbackQueryHandler(handle_button))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, start))  # To handle any text input as start command
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, start))
 
     app.run_polling(poll_interval=5)
-
 
 if __name__ == '__main__':
     main()
